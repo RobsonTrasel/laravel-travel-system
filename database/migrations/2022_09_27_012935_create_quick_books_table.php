@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('quick_books', function (Blueprint $table) {
             $table->id();
+            $table->double('amount');
+            $table->boolean('type');
+            $table->text('description');
             $table->timestamps();
         });
     }

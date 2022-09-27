@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tour_guides', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('tour_id');
+            $table->unsignedBigInteger('guide_id');
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
+            $table->foreign('guide_id')->references('id')->on('users')->onDelete('cascade');
+            $table->primary(['tour_id', 'guide_id']);
         });
     }
 

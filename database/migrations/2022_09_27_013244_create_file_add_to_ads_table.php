@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('file_add_to_ads', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('ads', function (Blueprint $table) {
+            $table->string('file_file_name')->nullable();
+            $table->integer('file_file_size')->nullable()->after('file_file_name');
+            $table->string('file_content_type')->nullable()->after('file_file_size');
+            $table->timestamp('file_updated_at')->nullable()->after('file_content_type');
         });
     }
 
@@ -26,6 +28,13 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_add_to_ads');
+        Schema::table('ads', function(Blueprint $table) {
+
+            $table->dropColumn('file_file_name');
+            $table->dropColumn('file_file_size');
+            $table->dropColumn('file_content_type');
+            $table->dropColumn('file_updated_at');
+
+        });
     }
 };

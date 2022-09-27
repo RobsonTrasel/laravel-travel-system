@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employee_type_user', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('employee_type_id')->unsigned()->index();
+            $table->foreign('employee_type_id')->references('id')->on('employee_types')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->primary(['employee_type_id', 'user_id']);
         });
     }
-
     /**
      * Reverse the migrations.
      *

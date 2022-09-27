@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('leave_allowances', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->date('day');
             $table->timestamps();
         });
     }

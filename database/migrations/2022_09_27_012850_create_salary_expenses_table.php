@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('salary_expenses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('expense_id')->nullable();
+            $table->double('amount');
+            $table->date('day');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('expense_id')->references('id')->on('expenses')->onDelete('set null');
         });
     }
 

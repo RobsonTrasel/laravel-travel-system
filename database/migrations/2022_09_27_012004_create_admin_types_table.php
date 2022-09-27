@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('admin_types', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('type');
+            $table->string('description');
             $table->timestamps();
         });
     }

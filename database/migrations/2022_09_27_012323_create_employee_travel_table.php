@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employee_travel', function (Blueprint $table) {
-            $table->id();
+        Schema::create('employee_travels', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('traveltype_id');
+            $table->double('amount');
+            $table->date('date');
+            $table->foreign('traveltype_id')->references('id')->on('employee_travel_types');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

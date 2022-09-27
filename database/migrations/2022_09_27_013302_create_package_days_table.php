@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('package_days', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('package_id');
+            $table->foreign('package_id')->references('id')->on('package')->onDelete('cascade');
+            $table->string('day');
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('package', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->string('country');
+            $table->string('destination');
+            $table->integer('days');
+            $table->double('price');
+            $table->string('description');
+            $table->boolean('terminated')->default(0);
             $table->timestamps();
         });
     }

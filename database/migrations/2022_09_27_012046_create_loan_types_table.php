@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('loan_types', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('name');
+            $table->double('rate');
+            $table->integer('installment');
             $table->timestamps();
         });
     }

@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('paye_taxes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedBigInteger('user_id');
+            $table->double('amount');
+            $table->date('month');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

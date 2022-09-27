@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('holiday', function (Blueprint $table) {
-            $table->id();
+        Schema::create('holidays', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('overtime_type');
+            $table->foreign('overtime_type')->references('id')->on('over_time_types')->onDelete('cascade');
+            $table->date('start_day');
+            $table->date('end_day');
             $table->timestamps();
         });
     }

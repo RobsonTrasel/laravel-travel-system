@@ -15,7 +15,23 @@ return new class extends Migration
     {
         Schema::create('ticket', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('agent_id');
+            $table->string('from');
+            $table->string('to');
+            $table->date('departure');
+            $table->string('class');
+            $table->integer('qty');
+            $table->string('note')->nullable();
+            $table->double('amount');
+            $table->boolean('received')->default(0);
+            $table->double('payment')->nullable();
+            $table->boolean('payed')->default(0);
+            $table->boolean('terminated')->default(0);
+            $table->date('create');
             $table->timestamps();
+            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
+            $table->foreign('agent_id')->references('id')->on('agent')->onDelete('cascade');
         });
     }
 

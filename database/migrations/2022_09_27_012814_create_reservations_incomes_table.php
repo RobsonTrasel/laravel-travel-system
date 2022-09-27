@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('reservations_incomes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('reservation_id')->nullable();
+            $table->unsignedBigInteger('income_id');
+            $table->double('amount');
+            $table->date('date');
             $table->timestamps();
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
         });
     }
 

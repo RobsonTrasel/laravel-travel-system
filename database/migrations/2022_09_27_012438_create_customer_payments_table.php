@@ -14,8 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customer_payments', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('tour_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->double('advance');
+            $table->double('total');
             $table->timestamps();
+            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
         });
     }
 

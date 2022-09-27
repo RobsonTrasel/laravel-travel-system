@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('leave', function (Blueprint $table) {
-            $table->id();
+        Schema::create('leaves', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('leavetype_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('leavetype_id')->references('id')->on('leave_types');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('reason');
+            $table->dateTime('time');
             $table->timestamps();
         });
     }

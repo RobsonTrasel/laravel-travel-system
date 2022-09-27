@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('loyalty', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('type');
+            $table->string('description');
+            $table->integer('discount');
+            $table->boolean('terminated');
             $table->timestamps();
         });
     }

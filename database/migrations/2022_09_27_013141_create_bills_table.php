@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('billtype_id');
+            $table->foreign('billtype_id')->references('id')->on('bills_type')->onDelete('cascade');
+            $table->string('bill_no');
+            $table->string('amount');
+            $table->date('date');
             $table->timestamps();
         });
     }

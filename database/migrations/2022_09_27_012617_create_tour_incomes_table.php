@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('tour_incomes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tour_id')->nullable();
+            $table->unsignedBigInteger('income_id');
+            $table->double('amount');
+            $table->date('date');
             $table->timestamps();
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('set null');
+            $table->foreign('income_id')->references('id')->on('incomes')->onDelete('cascade');
         });
     }
 

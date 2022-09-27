@@ -15,7 +15,16 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('driver_id');
+            $table->unsignedInteger('customer_id');
+            $table->string('destination');
+            $table->double('payment');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
+            $table->foreign('vehicle_id')->references('id')->on('vehicle')->onDelete('cascade');
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
